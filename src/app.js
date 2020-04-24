@@ -15,10 +15,10 @@ app.get("/repositories", (request, response) => {
 });
 
 app.post("/repositories", (request, response) => {
-  const { title, url, techs } = request.body;
-  
+  const { id, title, url, techs } = request.body;
+  console.log(id);
   const repository = {
-    id: uuid(),
+    id,
     title,
     url,
     techs,
@@ -55,7 +55,9 @@ app.put("/repositories/:id", (request, response) => {
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  const { id } = request.params;
+  const id = request.params.id;
+
+  console.log(id);
 
   const IndexRepository = repositories.findIndex(repository => repository.id === id);
   if (IndexRepository < 0) {
@@ -85,3 +87,5 @@ app.post("/repositories/:id/like", (request, response) => {
 });
 
 module.exports = app;
+
+
